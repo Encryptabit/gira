@@ -69,7 +69,7 @@ function getTicketInfoFromCloud() {
   parsedInfo["title"] = ticketTitle;
   parsedInfo["link"] = `https://autocrib.atlassian.net/browse/${ticketNumber}`;
 
-  // Need to add associated tickets
+  // Need to add associated tickets via Linked Tickets and children
 
   return parsedInfo;
 }
@@ -77,9 +77,16 @@ function getTicketInfoFromCloud() {
 // Function to pull child/linked issues eventually
 
 function computeAssociations(ticketFromJira) {
+  let ticketCache = associationContainer[ticketFromJira.number];
   const tfsTickets = getTicketInfoFromTfs();
 
-  tfsTickets.forEach((_, ticket) => {});
+  if (!ticketCache) {
+    ticketCache = {};
+    tfsTickets.forEach((_, ticket) => {
+      ticketCache.tfs = {};
+      ticketCache.tfs["ticket"];
+    });
+  }
 }
 
 /**
