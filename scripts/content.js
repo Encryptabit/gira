@@ -77,18 +77,9 @@ function getTicketInfoFromCloud() {
 // Function to pull child/linked issues eventually
 
 function computeAssociations(ticketFromJira) {
-
-  
-
   const tfsTickets = getTicketInfoFromTfs();
 
-  tfsTickets.forEach((_, ticket) => {
-    arra
-
-  })
-
-
-  }
+  tfsTickets.forEach((_, ticket) => {});
 }
 
 /**
@@ -97,21 +88,22 @@ function computeAssociations(ticketFromJira) {
  */
 function getTicketInfoFromTfs() {
   const pattern = /([a-zA-z]{2,4}[0-9]*)-\d*/g;
-  
-  const title = document
-  .querySelector(".bolt-header-title-row").innerText;
-  const parsedInfoContainer = title.match(pattern)
-    .map((ticket) => {
-            const parsedInfo = {};
-            parsedInfo['number'] = ticket;
-            parsedInfo['title'] = title;
-            parsedInfo['link'] = window.location.href;
 
-            return parsedInfo
-    });
+  const title = document.querySelector(".bolt-header-title-row").innerText;
+  const parsedInfoContainer = title.match(pattern).map((ticket) => {
+    const parsedInfo = {};
+    parsedInfo["number"] = ticket;
+    parsedInfo["title"] = title;
+    parsedInfo["link"] = window.location.href;
+
+    return parsedInfo;
+  });
 
   return parsedInfoContainer;
 }
+
+// Example Cloud Response: {number: 'AW41-10573', title: 'Enforce permissions on email users entering a site as a distributor Super-User', link: 'https://autocrib.atlassian.net/browse/AW41-10573'}
+// Example tfs Response: {number: 'AW41-10573', title: 'Merged PR 9921: AW41-10573/AW41-10574: Enforce permissions on email users ent...\nBrowse Files', link: 'https://tfs.autocrib.local/tfs/AutoCrib%20Git%20Re…f561797e5bb1f8f747?refName=refs%2Fheads%2Fdevelop'} link : "https://tfs.autocrib.local/tfs/AutoCrib%20Git%20Repository/autocrib/_git/ac-website/commit/cb054e12a8ed4fa6bd12fdf561797e5bb1f8f747?refName=refs%2Fheads%2Fdevelop" number : "AW41-10573" title : "Merged PR 9921: AW41-10573/AW41-10574: Enforce permissions on email users ent...\nBrowse Files"
 
 // 2. Read relevant DOM objects and parse them into a usable format
 
