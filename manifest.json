@@ -4,15 +4,26 @@
     "description": "Pools associations between JIRA, TFS and Confluence automatically",
     "version": "0.0.1",
     "action": {
-        "default_popup": "hello.html",
+        "default_popup": "popup.html",
         "default_icon": "images/icons/add-all-icon.png"
     },
     "content_scripts": [
-        {
+        {   "run_at": "document_start",
             "js":["scripts/content.js"],
             "matches": [
-                
+                "https://autocrib.atlassian.net/*"
             ]
         }
+    ],
+    "background": {
+        "service_worker": "scripts/service-worker.js"
+    },
+    "permissions": [
+        "storage",
+        "webRequest",
+        "webNavigation"
+    ],
+    "host_permissions": [
+        "https://autocrib.atlassian.net/*"
     ]
 }
